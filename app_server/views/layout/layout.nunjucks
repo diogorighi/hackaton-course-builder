@@ -1,0 +1,33 @@
+<!doctype html>
+<html>
+
+<head>
+	{% include './tags.nunjucks' %}
+</head>
+
+<body class="fixed-header menu-behind">
+
+	{% include './sidebar.nunjucks' %}
+
+	<div class="page-container">
+		{% include './header.nunjucks' %}
+
+		<!-- Start Page Content Wrapper -->
+		<div class="page-content-wrapper">
+			<!-- Start Content -->
+			<div class="content">
+				<div class="container-fluid padding-25 sm-padding-10">
+					{% block content %}
+					{% endblock %}
+				</div>
+			</div>
+			<!-- END Content -->
+		</div>
+		<!-- END Page Content Wrapper -->
+	</div>
+	<!-- END PAGE CONTAINER -->
+
+	{% include './js.nunjucks' %}
+</body>
+
+</html>
