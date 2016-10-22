@@ -22,8 +22,10 @@
 <link href="/assets/plugins/jquery-datatable/extensions/FixedColumns/css/dataTables.fixedColumns.min.css" rel="stylesheet" type="text/css" />
 <link href="/assets/plugins/datatables-responsive/css/datatables.responsive.css" rel="stylesheet" type="text/css" media="screen" />
 <link href="/assets/plugins/summernote/css/summernote.css" rel="stylesheet" type="text/css" media="screen">
+<link href="/assets/plugins/jquery-nestable/jquery.nestable.css" rel="stylesheet" type="text/css" media="screen" />
 <link href="/pages/css/pages-icons.css" rel="stylesheet" type="text/css">
 <link class="main-stylesheet" href="/pages/css/pages.css" rel="stylesheet" type="text/css" />
+<link class="main-stylesheet" href="/assets/css/style.css" rel="stylesheet" type="text/css" />
 <!--[if lte IE 9]>
     <link href="/pages/css/ie9.css" rel="stylesheet" type="text/css" />
 <![endif]-->
