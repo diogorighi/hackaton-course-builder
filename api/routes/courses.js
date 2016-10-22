@@ -1,59 +1,31 @@
-const express = require('express');
-const mongoose = require('mongoose');
-
-const router = express.Router();
-const Course = mongoose.model('Course');
-
-const sendJSONresponse = function(res, status, content) {
-	res.status(status).json(content);
-};
+const express       = require('express');
+const mongoose      = require('mongoose');
+const router        = express.Router();
+const Course        = mongoose.model('Course');
+const courseCtrl    = require('../controllers/courses');
+const chapterCtrl   = require('../controllers/chapters');
 
 // ============================================================================
-// Get one course
+// Controllers
 
-router.get('/:id', (req, res) => {
-	const courseId = req.params.id;
-	Course.findById(courseId, (err, course) => {
-		if (err) return sendJSONresponse(res, 200, err);
 
-		sendJSONresponse(res, 200, course);
-	});
-});
 
 // ============================================================================
-// Get ALL courses
+// Courses
 
-router.get('/', (req, res) => {
-	Course.find((err, courses) => {
-		if (err) return sendJSONresponse(res, 200, err);
+router.get('/', courseCtrl.getAllCourses);
 
-		sendJSONresponse(res, 200, courses);
-	});
-});
+router.get('/:id', courseCtrl.getCourse);
 
-// ============================================================================
-// Create course
-
-router.post('/', (req, res) => {
-	const course = req.body;
-
-	Course.create(course, function(err, course) {
-		if (err) return sendJSONresponse(res, 404, err);
-		sendJSONresponse(res, 200, course);
-	});
-});
+router.post('/', courseCtrl.createCourse);
+router.put('/:id', courseCtrl.updateCourse);
 
 // ============================================================================
-// Update course
+// Chapters
 
-router.put('/:id', (req, res) => {
-	const course = req.body;
+// Create - CRUD
+router.post('/:id/chapter', chapterCtrl.createChapter);
 
-	Course.findByIdAndUpdate(course.id, course, function(err, course) {
 
-		if (err) return sendJSONresponse(res, 404, err);
-		sendJSONresponse(res, 200, course);
-	});
-});
 
 module.exports = router;

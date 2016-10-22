@@ -19,7 +19,7 @@
 
 <div class="row m-b-15">
 	<div class="col-md-12">
-		<a class="btn btn-lg btn-primary pull-right" href="/chapters/{{course._id}}/new">
+		<a class="btn btn-lg btn-primary pull-right" href="/courses/{{course._id}}/chapter/new">
 			<i class="fa fa-plus"></i>
 			Create new chapter
 		</a>

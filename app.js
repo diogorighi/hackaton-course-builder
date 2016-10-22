@@ -9,11 +9,9 @@ const nunjucks      = require('nunjucks');
 
 const routes        = require('./app/routes/index');
 const courses       = require('./app/routes/courses');
-const chapters      = require('./app/routes/chapters');
 
 const api           = require('./api/routes/index');
 const apiCourses    = require('./api/routes/courses');
-const apiChapters   = require('./api/routes/chapters');
 
 const app           = express();
 
@@ -23,7 +21,6 @@ const app           = express();
 const env = process.env.NODE_ENV || 'development';
 app.locals.ENV = env;
 app.locals.ENV_DEVELOPMENT = env === 'development';
-
 
 // ============================================================================
 // View engine setup
@@ -45,20 +42,17 @@ app.use(bodyParser.urlencoded({
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-
 // ============================================================================
 // App Routers
 
 app.use('/', routes);
 app.use('/courses', courses);
-app.use('/chapters', chapters);
 
 // ============================================================================
 // API Routers
 
 app.use('/api/v1', api);
 app.use('/api/v1/courses', apiCourses);
-app.use('/api/v1/chapters', apiChapters);
 
 // ============================================================================
 // Error handlers
@@ -69,7 +63,6 @@ app.use((req, res, next) => {
   err.status = 404;
   next(err);
 });
-
 
 // development error handler
 // will print stacktrace
