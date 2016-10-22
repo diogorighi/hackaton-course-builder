@@ -5,24 +5,55 @@ const router = express.Router();
 const Course = mongoose.model('Course');
 
 const sendJSONresponse = function(res, status, content) {
-  res.status(status).json(content);
+	res.status(status).json(content);
 };
 
-router.get('/', (req, res) => {
-  Course.find((err, courses) => {
-    if (err) return sendJSONresponse(res, 200, err);
+// ============================================================================
+// Get one course
 
-    sendJSONresponse(res, 200, courses);
-  });
+router.get('/:id', (req, res) => {
+	const courseId = req.params.id;
+	Course.findById(courseId, (err, course) => {
+		if (err) return sendJSONresponse(res, 200, err);
+
+		sendJSONresponse(res, 200, course);
+	});
 });
 
-router.post('/', (req, res) => {
-  const course = req.body;
+// ============================================================================
+// Get ALL courses
 
-  Course.create(course, function(err, course) {
-    if (err) return sendJSONresponse(res, 404, err);
-    sendJSONresponse(res, 200, course);
-  });
+router.get('/', (req, res) => {
+	Course.find((err, courses) => {
+		if (err) return sendJSONresponse(res, 200, err);
+
+		sendJSONresponse(res, 200, courses);
+	});
+});
+
+// ============================================================================
+// Create course
+
+router.post('/', (req, res) => {
+	const course = req.body;
+
+	Course.create(course, function(err, course) {
+		if (err) return sendJSONresponse(res, 404, err);
+		sendJSONresponse(res, 200, course);
+	});
+});
+
+// ============================================================================
+// Update course
+
+router.put('/:id', (req, res) => {
+	const course = req.body;
+
+	Course.findByIdAndUpdate(course.id, course, function(err, course) {
+
+		if (err) return sendJSONresponse(res, 404, err);
+		sendJSONresponse(res, 200, course);
+	});
 });
 
 module.exports = router;

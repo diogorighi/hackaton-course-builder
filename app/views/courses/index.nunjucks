@@ -22,8 +22,12 @@
         <h3>{{course.name}}</h3>
         <p>{{course.subtitle}}</p>
         <div class="m-t-15">
-          <button type="button" class="btn btn-primary">
+          <a href="/courses/{{course._id}}/edit" class="btn btn-primary">
             Edit course
+          </a>
+
+          <button type="button" class="btn btn-primary">
+            Manage Content
           </button>
         </div>
       </div>
