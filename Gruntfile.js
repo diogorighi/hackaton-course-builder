@@ -13,7 +13,7 @@ module.exports = (grunt) => {
     develop: {
       server: {
         file: 'bin/www',
-        nodeArgs: ['--use_strict'],
+        nodeArgs: ['--use_strict']
       }
     },
     watch: {
@@ -27,9 +27,8 @@ module.exports = (grunt) => {
           'app.js',
           'routes/*.js',
           'views/**/*.nunjucks',
-          'app_api/**/*.js',
-          'app_server/**/*.js',
-          'robot/**/*.js',
+          'api/**/*.js',
+          'app/**/*.js'
         ],
         tasks: ['develop', 'delayed-livereload']
       },

@@ -3,9 +3,9 @@
 {% block content %}
 <div class="row m-b-15">
 	<div class="col-md-12">
-		<a class="btn btn-lg btn-primary pull-right" href="/something/new">
+		<a class="btn btn-lg btn-primary pull-right" href="/courses/new">
 			<i class="fa fa-plus"></i>
-			Create new something
+			Create new course
 		</a>
 	</div>
 </div>

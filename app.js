@@ -6,10 +6,13 @@ const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
 const nunjucks = require('nunjucks');
 
-require('./app_api/models/db');
+require('./api/models/db');
 
-const routes = require('./app_server/routes/index');
-const api = require('./app_api/routes/index');
+const routes = require('./app/routes/index');
+const courses = require('./app/routes/courses');
+
+const api = require('./api/routes/index');
+const apiCourses = require('./api/routes/courses');
 
 const app = express();
 
@@ -20,10 +23,10 @@ app.locals.ENV_DEVELOPMENT = env === 'development';
 
 // view engine setup
 
-app.set('views', path.join(__dirname, 'app_server', 'views'));
+app.set('views', path.join(__dirname, 'app', 'views'));
 app.set('view engine', 'nunjucks');
 
-nunjucks.configure(path.join(__dirname, 'app_server', 'views'), {
+nunjucks.configure(path.join(__dirname, 'app', 'views'), {
   autoescape: true,
   express: app
 });
@@ -38,7 +41,9 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', routes);
+app.use('/courses', courses);
 app.use('/api/v1', api);
+app.use('/api/v1/courses', apiCourses);
 
 // catch 404 and forward to error handler
 app.use((req, res, next) => {

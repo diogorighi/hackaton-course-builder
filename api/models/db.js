@@ -47,4 +47,5 @@ process.on('SIGTERM', () => {
   });
 });
 
-//SCHEMAS & MODELS
+// SCHEMAS & MODELS
+require('./courses');
