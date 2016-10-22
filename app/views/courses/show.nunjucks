@@ -17,50 +17,47 @@
   </div>
 </div>
 
-<div class="row m-b-15">
-	<div class="col-md-12">
-		<a class="btn btn-lg btn-primary pull-right" href="/courses/{{course._id}}/chapter/new">
-			<i class="fa fa-plus"></i>
-			Create new chapter
-		</a>
-	</div>
-</div>
-
-{% for chapter in course.chapters %}
 <div class="row">
-  <div class="col-md-12 sortable-column ui-sortable">
+  <div class="col-lg-6 col-md-6 col-sm-12">
     <div class="panel panel-default" data-pages="portlet">
       <div class="panel-heading">
-        <div class="panel-title"> {{chapter.title}}
-        </div>
-        <div class="panel-controls">
-          <ul>
-            <li><a href="#" class="portlet-collapse" data-toggle="collapse"><i
-        class="portlet-icon portlet-icon-collapse"></i></a>
-            </li>
-            <li><a href="#" class="portlet-refresh" data-toggle="refresh"><i
-        class="portlet-icon portlet-icon-refresh"></i></a>
-            </li>
-            <li><a href="#" class="portlet-close" data-toggle="close"><i
-        class="portlet-icon portlet-icon-close"></i></a>
-            </li>
-          </ul>
+        <div class="panel-title">
+          Course Organization
         </div>
       </div>
       <div class="panel-body">
-        <h3>
-          <span class="semi-bold">Drag</span> me!
-        </h3>
-        <p>When it comes to digital design, the lines between functionality, aesthetics, and psychology are inseparably blurred. Without the constraints of the physical world, there’s no natural form to fall back on, and every bit of constraint and affordance must be introduced intentionally. Good design makes a product useful. A product is bought to be used. It has to satisfy certain criteria, not only functional, but also psychological and aesthetic. </p>
-        <a class="btn btn-lg btn-primary pull-right" href="/courses/{{course._id}}/chapters/">
-    			<i class="fa fa-plus"></i>
-    			Create new content
-    		</a>
-      </div>
-    </div>
-  </div>
-</div>
-{% endfor %}
+        <p>
+          Create your chapters and organize your content!
+        </p>
+        <div class="dd clearfix" id="basic_example">
+          <ol class="dd-list">
+            {% for chapter in course.chapters %}
+            <li class="dd-item" data-id="1">
+              <div class="dd-handle">
+                {{chapter.title}}
+                <div class="pull-right">
+                  <button type="button" class="btn btn-primary btn-xs btn-nestable">
+                    <i class="fa fa-pencil"></i>
+                  </button>
+                </div>
+              </div>
+            </li>
+            {% endfor %}
+          </ol>
+        </div>
+        <div class="clearfix"></div>
+        <div class="m-t-15 pull-right">
+          <a class="btn btn-primary" href="/chapters/{{course._id}}/new">
+      			New chapter
+      		</a>
+          <a class="btn btn-primary" href="/chapters/{{course._id}}/new">
+      			New content
+      		</a>
+        </div>
+      </div><!-- /panel-body -->
+    </div><!-- /panel -->
+  </div><!-- /col -->
+</div><!-- /row -->
 
 
 {% endblock %}
