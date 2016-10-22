@@ -26,7 +26,7 @@ module.exports = (grunt) => {
           'bin/www',
           'app.js',
           'routes/*.js',
-          'views/**/*.nunjucks',
+          'app/views/**/*.nunjucks',
           'api/**/*.js',
           'app/**/*.js'
         ],

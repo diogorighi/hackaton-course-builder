@@ -1,0 +1,34 @@
+{% extends 'layout/layout.nunjucks' %}
+
+{% block content %}
+<div class="row m-b-15">
+	<div class="col-md-12">
+		<a class="btn btn-lg btn-primary pull-right" href="/courses/new">
+			<i class="fa fa-plus"></i>
+			Create new course
+		</a>
+	</div>
+</div>
+
+<div class="row">
+  {% for course in courses %}
+  <div class="col-md-4">
+    <div data-pages="portlet" class="panel panel-default" id="portlet-basic">
+      <div class="panel-heading ">
+        <div class="panel-title">Curso
+        </div>
+      </div>
+      <div class="panel-body">
+        <h3>{{course.name}}</h3>
+        <p>{{course.subtitle}}</p>
+        <div class="m-t-15">
+          <button type="button" class="btn btn-primary">
+            Edit course
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+  {% endfor %}
+</div>
+{% endblock %}

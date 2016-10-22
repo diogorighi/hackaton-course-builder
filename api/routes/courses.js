@@ -8,12 +8,12 @@ const sendJSONresponse = function(res, status, content) {
   res.status(status).json(content);
 };
 
-// const createJSONresponse = function(isError, message) {
-//   return {
-//     error: isError,
-//     message: message
-//   };
-// };
+router.get('/', (req, res) => {
+  Course.find((err, courses) => {
+    if (err) return sendJSONresponse(res, 200, err);
+    sendJSONresponse(res, 200, courses);
+  });
+});
 
 router.post('/', (req, res) => {
   const course = req.body.course;
