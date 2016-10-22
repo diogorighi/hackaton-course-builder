@@ -26,9 +26,9 @@
             Edit course
           </a>
 
-          <button type="button" class="btn btn-primary">
+          <a href="/courses/{{course._id}}" class="btn btn-primary">
             Manage Content
-          </button>
+          </a>
         </div>
       </div>
     </div>
