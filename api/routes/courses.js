@@ -18,8 +18,9 @@ router.put('/:id', courseCtrl.updateCourse);
 // ============================================================================
 // Chapters
 
+router.get('/:id/chapters/:chapterId', chapterCtrl.getChapter);
 router.post('/:id/chapters', chapterCtrl.createChapter);
 
-
+router.put('/:id/chapters/:chapterId', chapterCtrl.updateChapter);
 
 module.exports = router;

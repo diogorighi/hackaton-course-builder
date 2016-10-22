@@ -20,7 +20,10 @@ router.get('/new', (req, res) => res.render('courses/new'));
 // ============================================================================
 // Chapters
 
-router.get('/:id/chapters/new', chapterCtrl.formChapter);
+router.get('/:id/chapters/new', chapterCtrl.newChapter);
+router.get('/:id/chapters/:chapterId/edit', chapterCtrl.editChapter);
+
+router.post('/:id/chapters/:chapterId', chapterCtrl.updateChapter);
 router.post('/:id/chapters', chapterCtrl.createChapter);
 
 module.exports = router;
