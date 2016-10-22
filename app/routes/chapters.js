@@ -18,20 +18,7 @@ router.get('/:id/new', (req, res) => {
 // ============================================================================
 // Create - CRUD
 
-router.post('/', (req, res) => {
-  const chapter = req.body.chapter;
-
-  const options = {
-    method: 'POST',
-    body: chapter,
-    uri: `${apiUrl}/chapters`,
-    json: true
-  };
-
-  rp(options)
-  .then(() => res.redirect(`/courses/${chapter.id}`))
-  .catch(err => res.render('chapters/new', {err, chapter}));
-});
+router.post('/', chapterCtrl.addChapter);
 
 // ============================================================================
 
