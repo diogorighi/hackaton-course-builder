@@ -26,11 +26,12 @@
 	</div>
 </div>
 
+{% for chapter in course.chapters %}
 <div class="row">
   <div class="col-md-12 sortable-column ui-sortable">
     <div class="panel panel-default" data-pages="portlet">
       <div class="panel-heading">
-        <div class="panel-title">Draggable Portlet
+        <div class="panel-title"> {{chapter.title}}
         </div>
         <div class="panel-controls">
           <ul>
@@ -59,5 +60,7 @@
     </div>
   </div>
 </div>
+{% endfor %}
+
 
 {% endblock %}
