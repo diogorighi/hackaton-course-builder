@@ -9,11 +9,9 @@ const apiUrl = 'http://localhost:3000/api/v1';
  */
 
 function formChapter(req, res) {
-  const chapter = {};
-  chapter.course_id = req.params.id;
-  res.render('courses/chapters/new', {chapter});
+  const courseId = req.params.id;
+  res.render('courses/chapters/new', {courseId});
 }
-
 
 /**
  * Add chapter to a coruse
