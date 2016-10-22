@@ -46,10 +46,15 @@
             </div>
           </div>
           <div class="clearfix"></div>
-          <button class="btn btn-lg btn-primary pull-right" type="submit">
-            <i class="fa fa-save"></i>
-            Save
-          </button>
+          <div class="pull-right">
+            <a href="/courses" class="btn btn-lg btn-danger">
+              Cancel
+            </a>
+            <button class="btn btn-lg btn-primary" type="submit">
+              <i class="fa fa-save"></i>
+              Save
+            </button>
+          </div>
         </form>
       </div>
     </div>

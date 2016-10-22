@@ -39,6 +39,15 @@ function getCourse(req, res) {
   .catch(err => res.render(`courses/`, {err}));
 }
 
+/**
+ * New course
+ * @param {req} requisition
+ * @param {res} response
+ */
+
+function newCourse(req, res) {
+  res.render('courses/new');
+}
 
 /**
  * Create course
@@ -109,6 +118,7 @@ function formCourse(req, res) {
 module.exports = {
   getAllCourses,
   getCourse,
+  newCourse,
   createCourse,
   updateCourse,
   formCourse
