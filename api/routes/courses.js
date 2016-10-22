@@ -6,11 +6,6 @@ const courseCtrl    = require('../controllers/courses');
 const chapterCtrl   = require('../controllers/chapters');
 
 // ============================================================================
-// Controllers
-
-
-
-// ============================================================================
 // Courses
 
 router.get('/', courseCtrl.getAllCourses);
@@ -23,8 +18,7 @@ router.put('/:id', courseCtrl.updateCourse);
 // ============================================================================
 // Chapters
 
-// Create - CRUD
-router.post('/:id/chapter', chapterCtrl.createChapter);
+router.post('/:id/chapters', chapterCtrl.createChapter);
 
 
 

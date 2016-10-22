@@ -11,7 +11,7 @@ const apiUrl = 'http://localhost:3000/api/v1';
 function formChapter(req, res) {
   const chapter = {};
   chapter.course_id = req.params.id;
-  res.render('courses/chapter/new', {chapter});
+  res.render('courses/chapters/new', {chapter});
 }
 
 
@@ -22,18 +22,18 @@ function formChapter(req, res) {
  */
 
 function createChapter(req, res) {
-  const chapter     = req.body.chapter;
-  chapter.course_id = req.params.id;
+  const courseId  = req.params.id;
+  const chapter   = req.body.chapter;
 
   const options = {
     method: 'POST',
     body: chapter,
-    uri: `${apiUrl}/courses/${chapter.course_id}/chapter`,
+    uri: `${apiUrl}/courses/${courseId}/chapters`,
     json: true
   };
 
   rp(options)
-  .then(() => res.redirect(`/courses/${chapter.course_id}`))
+  .then(() => res.redirect(`/courses/${courseId}`))
   .catch(err => res.render('/', {err, chapter}));
 }
 

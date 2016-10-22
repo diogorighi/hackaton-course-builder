@@ -47,7 +47,7 @@
         </div>
         <div class="clearfix"></div>
         <div class="m-t-15 pull-right">
-          <a class="btn btn-primary" href="/chapters/{{course._id}}/new">
+          <a class="btn btn-primary" href="/courses/{{course._id}}/chapters/new">
       			New chapter
       		</a>
           <a class="btn btn-primary" href="/chapters/{{course._id}}/new">

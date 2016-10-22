@@ -8,9 +8,10 @@ const helpFuncs = require('../funcs.js');
 const sendJSONresponse = helpFuncs.sendJSONresponse;
 
 function createChapter(req, res) {
-  const chapter = req.body;
+  const courseId  = req.params.id;
+  const chapter   = req.body;
 
-  Course.findByIdAndUpdate(chapter.course_id,
+  Course.findByIdAndUpdate(courseId,
     {$push: { "chapters": {title: chapter.title}} },
     (err, course) => {
     if (err) return sendJSONresponse(res, 200, err);
