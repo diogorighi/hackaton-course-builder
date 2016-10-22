@@ -4,7 +4,7 @@
   <div class="col-lg-8 col-md-8 col-sm-8">
     <div class="panel panel-default">
       <div class="panel-body">
-        <form id="form-personal" class="js-form-course" action="/api/v1/courses" method="POST" role="form" autocomplete="off">
+        <form id="form-personal" class="js-form-course" action="/courses" method="POST" role="form" autocomplete="off">
           <div class="row">
             <div class="col-sm-12 col-md-12">
               <div class="form-group">
