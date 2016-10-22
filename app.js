@@ -1,27 +1,32 @@
-const express = require('express');
-const path = require('path');
-// const favicon = require('serve-favicon');
-const logger = require('morgan');
-const cookieParser = require('cookie-parser');
-const bodyParser = require('body-parser');
-const nunjucks = require('nunjucks');
-
 require('./api/models/db');
+const express       = require('express');
+const path          = require('path');
+//const favicon       = require('serve-favicon');
+const logger        = require('morgan');
+const cookieParser  = require('cookie-parser');
+const bodyParser    = require('body-parser');
+const nunjucks      = require('nunjucks');
 
-const routes = require('./app/routes/index');
-const courses = require('./app/routes/courses');
+const routes        = require('./app/routes/index');
+const courses       = require('./app/routes/courses');
+const chapters      = require('./app/routes/chapters');
 
-const api = require('./api/routes/index');
-const apiCourses = require('./api/routes/courses');
+const api           = require('./api/routes/index');
+const apiCourses    = require('./api/routes/courses');
+const apiChapters   = require('./api/routes/chapters');
 
-const app = express();
+const app           = express();
+
+// ============================================================================
+// Development
 
 const env = process.env.NODE_ENV || 'development';
-
 app.locals.ENV = env;
 app.locals.ENV_DEVELOPMENT = env === 'development';
 
-// view engine setup
+
+// ============================================================================
+// View engine setup
 
 app.set('views', path.join(__dirname, 'app', 'views'));
 app.set('view engine', 'nunjucks');
@@ -40,10 +45,23 @@ app.use(bodyParser.urlencoded({
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+
+// ============================================================================
+// App Routers
+
 app.use('/', routes);
 app.use('/courses', courses);
+app.use('/chapters', chapters);
+
+// ============================================================================
+// API Routers
+
 app.use('/api/v1', api);
 app.use('/api/v1/courses', apiCourses);
+app.use('/api/v1/chapters', apiChapters);
+
+// ============================================================================
+// Error handlers
 
 // catch 404 and forward to error handler
 app.use((req, res, next) => {
@@ -52,7 +70,6 @@ app.use((req, res, next) => {
   next(err);
 });
 
-// error handlers
 
 // development error handler
 // will print stacktrace
