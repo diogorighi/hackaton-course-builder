@@ -17,7 +17,7 @@ router.get('/', (req, res) => {
 });
 
 router.post('/', (req, res) => {
-  const course = req.body.course;
+  const course = req.body;
 
   Course.create(course, function(err, course) {
     if (err) return sendJSONresponse(res, 404, err);
