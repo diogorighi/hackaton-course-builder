@@ -5,6 +5,7 @@ const Course    = mongoose.model('Course');
 const helpFuncs = require('../funcs.js');
 
 const sendJSONresponse = helpFuncs.sendJSONresponse;
+const courseValidation = helpFuncs.courseValidation;
 
 /**
  * Get all courses
@@ -44,13 +45,22 @@ function getCourse(req, res) {
  */
 
 
-function createCourse(req, res){
+function createCourse(req, res) {
   const course = req.body;
+  const cv = courseValidation(course);
 
-  Course.create(course, function(err, course) {
-    if (err) return sendJSONresponse(res, 404, err);
-    sendJSONresponse(res, 200, course);
-  });
+  if (cv.isValid) {
+    course.price = course.price.replace('$', '').replace(',', '');
+    course.duration = course.duration.replace(',', '');
+    console.log('==============================');
+    console.log(course);
+    Course.create(course, function(err, course) {
+      if (err) return sendJSONresponse(res, 404, err);
+      sendJSONresponse(res, 200, course);
+    });
+  } else {
+    sendJSONresponse(res, 404, cv.messages);
+  }
 }
 
 /**

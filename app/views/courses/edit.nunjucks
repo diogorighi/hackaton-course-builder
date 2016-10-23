@@ -25,13 +25,13 @@
 						<div class="col-sm-6 col-md-6">
 							<div class="form-group">
 								<label>Price</label>
-								<input type="text" class="form-control" name="course[price]" value="{{course.price}}"/>
+								<input type="text" data-a-sign="$" data-v-min="000000.00" data-v-max="999999.99" class="autonumeric form-control" name="course[price]" value="{{course.price}}"/>
 							</div>
 						</div>
 						<div class="col-sm-6 col-md-6">
 							<div class="form-group">
 								<label>Duration</label>
-								<input type="text" class="form-control" name="course[duration]" value="{{course.duration}}"/>
+								<input type="text" data-v-min="0000.0" data-v-max="9999.9" class="autonumeric form-control" name="course[duration]" value="{{course.duration}}"/>
 							</div>
 						</div>
 					</div>
