@@ -52,8 +52,6 @@ function createCourse(req, res) {
   if (cv.isValid) {
     course.price = course.price.replace('$', '').replace(',', '');
     course.duration = course.duration.replace(',', '');
-    console.log('==============================');
-    console.log(course);
     Course.create(course, function(err, course) {
       if (err) return sendJSONresponse(res, 404, err);
       sendJSONresponse(res, 200, course);
