@@ -6,7 +6,7 @@
       <div class="panel-body">
         <h2>{{course.name}} - {{course.subtitle}}</h2>
         <p>
-          {{course.description}}
+          {{course.description | safe}}
         </p>
         <p>
           Price: {{course.price}} /
@@ -50,11 +50,34 @@
                   <div class="dd-handle">
                     {{content.title}}
                     <div class="pull-right">
+                      {% if content.media_type == 'html' %}
+                      <a class="btn btn-primary btn-xs btn-nestable dd-nodrag js-modal" data-id="{{content._id}}">
+                        <i class="fs-12 pg-search"></i>
+                      </a>
+                      {% else %}
                       <a class="btn btn-primary btn-xs btn-nestable dd-nodrag" download="{{content.content}}" href="/uploads/{{content.content}}">
                         <i class="fs-12 pg-download"></i>
                       </a>
+                      {% endif %}
                     </div>
                   </div>
+                  <!-- Modal -->
+                  <div class="modal fade slide-up disable-scroll" id="{{content._id}}" tabindex="-1" role="dialog" aria-hidden="false">
+                    <div class="modal-dialog ">
+                      <div class="modal-content-wrapper">
+                        <div class="modal-content">
+                          <div class="modal-header clearfix text-left">
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><i class="pg-close fs-14"></i>
+                            </button>
+                            <h5>{{content.title}}</h5>
+                          </div>
+                          <div class="modal-body">
+                            {{content.content | safe}}
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div><!-- /.modal-content -->
                 </li>
                 {% endfor %}
               </ol>

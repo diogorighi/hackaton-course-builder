@@ -21,18 +21,30 @@ function newContent(req, res) {
 
 function createContent(req, res) {
 
-  if (req.file) {
+  console.log(req.body);
+
+  if (req.file || req.body.content.media_type === 'html') {
     const courseId = req.params.id;
     const chapterId = req.params.chapterId;
-    const content = {
+    let mediaType;
+    let content;
+    if (req.file) {
+      mediaType = req.file.mimetype;
+      content = req.file.filename;
+    } else {
+      mediaType = req.body.content.media_type;
+      content = req.body.content.content;
+    }
+
+    const contentObj = {
       title: req.body.content.title,
-      content: req.file.filename,
-      media_type: req.file.mimetype
+      content: content,
+      media_type: mediaType
     };
 
     const options = {
       method: 'POST',
-      body: content,
+      body: contentObj,
       uri: `${apiUrl}/courses/${courseId}/chapters/${chapterId}/contents`,
       json: true
     };

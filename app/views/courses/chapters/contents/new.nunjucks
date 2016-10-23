@@ -18,7 +18,7 @@
             <div class="col-sm-12 col-md-12">
               <div class="form-group">
                 <label>Media Type</label>
-                <select class="full-width js-select-media-type" data-init-plugin="select2">
+                <select name="content[media_type]" class="full-width js-select-media-type" data-init-plugin="select2">
                   <option value="">Select a media type</option>
                   <option value="image">Image</option>
                   <option value="audio">Audio</option>
