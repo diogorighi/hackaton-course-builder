@@ -14,13 +14,16 @@ $(function(){
   if($('.nestable-list')) {
     $('.nestable-list').nestable();
 
+    // Update via Ajax Chapter order
     $('.dd').on('change', function() {
+      var chapterOrder = $('.dd').nestable('serialize');
       $.ajax({
-        url: '/courses/setChapterOrder',
+        url: '/api/v1/courses/setChapterOrder/580c27915756cd277593addf',
         method: "POST",
-        data: JSON.stringify($('.dd').nestable('serialize'))
+        data: JSON.stringify(chapterOrder),
+        contentType: 'application/json',
       }).done( function(){
-        console.log('Ajax Done!');
+        console.log(chapterOrder);
       })
     });
   }

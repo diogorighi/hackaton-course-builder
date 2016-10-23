@@ -45,13 +45,6 @@ const fileFilter = function(req, file, cb) {
 const upload = multer({storage, fileFilter});
 
 // ============================================================================
-// Front-end routers
-
-router.post('/setChapterOrder', function(req, res) {
-  res.send(req.body);
-});
-
-// ============================================================================
 // Courses
 
 router.get('/', courseCtrl.getAllCourses);

@@ -7,6 +7,11 @@ const chapterCtrl   = require('../controllers/chapters');
 const contentCtrl   = require('../controllers/contents');
 
 // ============================================================================
+// Front-end routers
+
+router.post('/setChapterOrder/:id', chapterCtrl.setChaptersOrder);
+
+// ============================================================================
 // Courses
 
 router.get('/', courseCtrl.getAllCourses);

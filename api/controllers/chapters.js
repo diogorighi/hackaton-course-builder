@@ -7,6 +7,22 @@ const helpFuncs = require('../funcs.js');
 const sendJSONresponse = helpFuncs.sendJSONresponse;
 
 /**
+ * Set chapters order
+ * @param {req} requisition
+ * @param {res} response
+ */
+
+ function setChaptersOrder(req, res) {
+  const courseId  = req.params.id;
+  const order     = JSON.stringify(req.body);
+
+  Course.findByIdAndUpdate(courseId, {'chapters_order': order}, function(err, course) {
+    if (err) return sendJSONresponse(res, 200, err);
+    sendJSONresponse(res, 200, course);
+  });
+}
+
+/**
  * Create chapter
  * @param {req} requisition
  * @param {res} response
@@ -75,5 +91,6 @@ function updateChapter(req, res) {
 module.exports = {
   createChapter,
   getChapter,
-  updateChapter
+  updateChapter,
+  setChaptersOrder
 };
