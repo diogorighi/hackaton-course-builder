@@ -46,7 +46,7 @@
               </div><!-- dd-handle -->
               <ol class="dd-list">
                 {% for content in chapter.contents %}
-                <li class="dd-item">
+                <li class="dd-item" data-id="{{content._id}}">
                   <div class="dd-handle">
                     {{content.title}}
                     <div class="pull-right">

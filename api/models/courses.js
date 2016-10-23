@@ -17,7 +17,11 @@ const chapterSchema = new mongoose.Schema({
     },
     media_type: {
       type: String
-    }
+    },
+    contents_order: {
+      type: String
+    },
+
   }]
 });
 

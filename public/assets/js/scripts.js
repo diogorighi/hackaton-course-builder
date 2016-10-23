@@ -12,20 +12,26 @@ $(function(){
   }
 
   if($('.nestable-list')) {
-    $('.nestable-list').nestable();
+    $('.nestable-list').nestable({maxDepth: 2});
 
-    // Update via Ajax Chapter order
-    $('.dd').on('change', function() {
-      var chapterOrder = $('.dd').nestable('serialize');
+
+    $('.dd').on('change', function(e) {
       var courseId = $(location).attr('href').split('/').pop();
+      var chapterOrder = $('.dd').nestable('serialize');
+
+      //console.log(JSON.stringify(chapterOrder));
+      //console.log( $(this).attr("data-id") );
+
+      // ======================================================================
+      // Update via Ajax Chapter Order
       $.ajax({
         url: '/api/v1/courses/setChapterOrder/' + courseId,
         method: "POST",
         data: JSON.stringify(chapterOrder),
-        contentType: 'application/json',
-      }).done( function(){
-        console.log(chapterOrder);
-      })
+        contentType: 'application/json'}).done(
+          function() {
+            console.log("Done");
+      });
     });
   }
 

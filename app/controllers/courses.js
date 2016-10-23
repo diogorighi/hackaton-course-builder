@@ -37,6 +37,12 @@ function getCourse(req, res) {
   rp(options)
   .then(course => {
 
+    console.log("============================================");
+    console.log("============================================");
+    console.log(course.chapters_order);
+    console.log("============================================");
+    console.log("============================================");
+
     const chapters_order  = JSON.parse(course.chapters_order);
     const chapters        = course.chapters;
 
