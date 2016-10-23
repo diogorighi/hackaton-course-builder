@@ -35,8 +35,25 @@ function getCourse(req, res) {
   };
 
   rp(options)
-  .then(course => res.render(`courses/show`, {course}))
-  .catch(err => res.render(`courses/`, {err}));
+  .then(course => {
+
+    const chapters_order  = JSON.parse(course.chapters_order);
+    const chapters        = course.chapters;
+    course.ordered  = [];
+
+    console.log("========================================");
+
+    chapters_order.forEach(function(item) {
+      let a = chapters.find( function(element) {
+        return element._id === item.id
+      });
+      course.ordered.push(a);
+    });
+    console.log(course.ordered);
+
+    res.render(`courses/show`, {course})
+  })
+  .catch(err => res.render(`courses`, {err}));
 }
 
 /**
