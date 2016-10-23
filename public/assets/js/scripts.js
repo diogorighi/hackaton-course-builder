@@ -65,4 +65,6 @@ $(function(){
     var target = $(this).data('id');
     $('#' + target).modal('show');
   });
+
+  $('.autonumeric').autoNumeric('init');
 });

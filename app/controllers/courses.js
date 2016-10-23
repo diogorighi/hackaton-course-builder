@@ -54,7 +54,7 @@ function getCourse(req, res) {
 
     res.render(`courses/show`, {course})
   })
-  .catch(err => res.render(`courses`, {err}));
+  .catch(err => res.render('courses/index', {err}));
 }
 
 /**
@@ -85,9 +85,9 @@ function createCourse(req, res) {
 
   rp(options)
   .then(() => res.redirect('/'))
-  .catch(err => res.render('courses/new', {err, course}));
+  .catch(err => res.render('courses/new', {err}));
+  // .catch(err => res.send(err));
 }
-
 
 /**
  * Update course

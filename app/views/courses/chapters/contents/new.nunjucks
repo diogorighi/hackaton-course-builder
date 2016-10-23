@@ -9,7 +9,7 @@
             <div class="col-sm-12 col-md-12">
               <div class="form-group">
                 <label>Content Title</label>
-                <input type="text" class="form-control" name="content[title]" />
+                <input type="text" class="form-control" name="content[title]" maxlength="255" />
               </div>
             </div>
           </div>
