@@ -36,23 +36,7 @@ function getCourse(req, res) {
 
   rp(options)
   .then(course => {
-
-    console.log("============================================");
-    console.log("============================================");
-    console.log(course.chapters_order);
-    console.log("============================================");
-    console.log("============================================");
-
-    const chapters_order  = JSON.parse(course.chapters_order);
-    const chapters        = course.chapters;
-
-    // Sort chapters by chapters_order
-    course.chapters_ordered = chapters_order.map( item =>
-      chapters.find( element =>
-        element._id === item.id)
-    );
-
-    res.render(`courses/show`, {course})
+    res.render(`courses/show`, {course});
   })
   .catch(err => res.render('courses/index', {err}));
 }
@@ -86,7 +70,6 @@ function createCourse(req, res) {
   rp(options)
   .then(() => res.redirect('/'))
   .catch(err => res.render('courses/new', {err}));
-  // .catch(err => res.send(err));
 }
 
 /**

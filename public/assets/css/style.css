@@ -10,3 +10,8 @@
   position: relative;
   right: -10px;
 }
+
+body.menu-behind .header .brand {
+  max-width: 400px;
+  width: 100%;
+}
