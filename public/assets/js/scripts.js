@@ -13,7 +13,18 @@ $(function(){
 
   if($('.nestable-list')) {
     $('.nestable-list').nestable();
+
+    $('.dd').on('change', function() {
+      $.ajax({
+        url: '/courses/setChapterOrder',
+        method: "POST",
+        data: JSON.stringify($('.dd').nestable('serialize'))
+      }).done( function(){
+        console.log('Ajax Done!');
+      })
+    });
   }
+
 
   if($('.js-select-media-type')) {
     $('.js-select-media-type').on('change', function() {
