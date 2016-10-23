@@ -14,7 +14,6 @@ const mimeTypes = {
   'image/gif': '.gif'
 };
 
-
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
     cb(null, './app/uploads/')
@@ -25,6 +24,13 @@ const storage = multer.diskStorage({
 });
 
 const upload        = multer({storage});
+
+// ============================================================================
+// Front-end routers
+
+router.post('/setChapterOrder', function(req, res) {
+  res.send(req.body);
+});
 
 // ============================================================================
 // Courses
@@ -52,9 +58,6 @@ router.post('/:id/chapters', chapterCtrl.createChapter);
 router.get('/:id/chapters/:chapterId/contents/new', contentCtrl.newContent);
 
 router.post('/:id/chapters/:chapterId/contents', upload.single('content[file]'), contentCtrl.createContent);
-
-//router.post('/:courseId/chapters/:chapterId/contents', contetrCtrl.createContent);
-
 
 
 module.exports = router;

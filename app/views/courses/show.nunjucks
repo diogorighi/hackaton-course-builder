@@ -32,7 +32,7 @@
         <div class="dd clearfix nestable-list">
           <ol class="dd-list">
             {% for chapter in course.chapters %}
-            <li class="dd-item">
+            <li class="dd-item" data-id="{{chapter._id}}">
               <div class="dd-handle">
                 {{chapter.title}}
                 <div class="pull-right">
