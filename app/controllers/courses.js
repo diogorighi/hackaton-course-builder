@@ -37,24 +37,31 @@ function getCourse(req, res) {
   rp(options)
   .then(course => {
 
-    console.log("============================================");
-    console.log("============================================");
-    console.log(course.chapters_order);
-    console.log("============================================");
-    console.log("============================================");
+    // // Sort chapters and contents in specific order
+    // if(course.chapters_order) {
+    //   const chapters_order  = JSON.parse(course.chapters_order);
+    //   const chapters        = course.chapters;
 
-    const chapters_order  = JSON.parse(course.chapters_order);
-    const chapters        = course.chapters;
 
-    // Sort chapters by chapters_order
-    course.chapters_ordered = chapters_order.map( item =>
-      chapters.find( element =>
-        element._id === item.id)
-    );
+    //   course.chapters_ordered = chapters_order.map( item =>
+    //     chapters.find( element =>
+    //       element._id === item.id)
+    //   );
+    // }
+    // // In case the order is not defined yet. User creation order
+    // else {
+    //   course.chapters_ordered = course.chapters.map( item => {
+    //     return { _id: item._id, children: [], title: item.title }
+    //   });
+    // }
 
     res.render(`courses/show`, {course})
   })
-  .catch(err => res.render('courses/index', {err}));
+  .catch(err => {
+    console.error(err);
+    res.render('courses/index', {err});
+    }
+  );
 }
 
 /**

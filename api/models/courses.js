@@ -1,30 +1,5 @@
 const mongoose = require('mongoose');
 
-const chapterSchema = new mongoose.Schema({
-  title: {
-    type: String,
-    maxlength: 255,
-    required: true
-  },
-  contents: [{
-    title: {
-      type: String,
-      maxlength: 255,
-      required: true
-    },
-    content: {
-      type: String
-    },
-    media_type: {
-      type: String
-    },
-    contents_order: {
-      type: String
-    },
-
-  }]
-});
-
 const courseSchema = new mongoose.Schema({
   name: {
     type: String,
@@ -47,7 +22,13 @@ const courseSchema = new mongoose.Schema({
     type: Number,
     required: true
   },
-  chapters: [chapterSchema],
+  chapters: [{
+    title: {
+      type: String,
+      maxlength: 255,
+      required: true
+    }
+  }],
   chapters_order: {
     type: String
   },

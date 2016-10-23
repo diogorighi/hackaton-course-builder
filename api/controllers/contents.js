@@ -1,10 +1,11 @@
-const express   = require('express');
-const mongoose  = require('mongoose');
-const router    = express.Router();
-const Course    = mongoose.model('Course');
-const helpFuncs = require('../funcs.js');
-
-const sendJSONresponse = helpFuncs.sendJSONresponse;
+const express             = require('express');
+const mongoose            = require('mongoose');
+const router              = express.Router();
+const Course              = mongoose.model('Course');
+const Content             = mongoose.model('Content');
+const ChaptersContents    = mongoose.model('ChaptersContents');
+const helpFuncs           = require('../funcs.js');
+const sendJSONresponse    = helpFuncs.sendJSONresponse;
 
 /**
  * Create Content
@@ -17,19 +18,30 @@ function createContent(req, res) {
   const chapterId = req.params.chapterId;
   const content   = req.body;
 
-  console.log(content);
 
-  Course.findOneAndUpdate({'_id': courseId, 'chapters._id': chapterId},
-    {
-      $push: {
-        'chapters.$.contents': content
+  // Creating a new content and saving reference
+  const newContent  = new Content({title: content.title, content: content.content, media_type: content.media_type});
+
+  newContent.save(function (err) {
+    if (err) return err;
+
+    const chapter_contents = new ChaptersContents(
+      {
+        courseId: courseId,
+        chapterId: chapterId,
+        contentId: newContent._id
       }
-    },
-  (err, course) => {
-    if (err) return sendJSONresponse(res, 200, err);
-    sendJSONresponse(res, 200, course);
+    );
+
+    chapter_contents.save(function (err) {
+      if (err) {
+        return sendJSONresponse(res, 200, err);
+      }
+      sendJSONresponse(res, 200, courseId);
+    });
   });
 }
+
 
 // ============================================================================
 

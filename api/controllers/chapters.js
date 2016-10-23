@@ -39,6 +39,41 @@ const sendJSONresponse = helpFuncs.sendJSONresponse;
 }
 
 /**
+ * Make chapters and chapters_orders sync
+ * @param {req} courseId
+ * @param {res} course
+ */
+
+function updateChaptersOrders(courseId, course) {
+
+  let chapters_order;
+  if (!course.chapters_order) {
+    chapters_order = JSON.parse("[]");
+  } else {
+    chapters_order = JSON.parse(course.chapters_order);
+  }
+
+  // Refresh chapters_order
+  Course.findById(courseId, function (err, course) {
+
+    course.chapters.find( (element, index, arr) => {
+      let found = chapters_order.find(element2 => {
+        return element._id == element2.id
+      });
+      if(!found) {
+        chapters_order.push({ id: element._id, children: []})
+      }
+    });
+
+    chapters_order = JSON.stringify(chapters_order);
+
+    Course.findByIdAndUpdate(courseId, {$set: {'chapters_order':chapters_order }}, function(err, found) {
+      if (err) return sendJSONresponse(res, 200, err);
+    });
+  });
+}
+
+/**
  * Create chapter
  * @param {req} requisition
  * @param {res} response
@@ -49,10 +84,16 @@ function createChapter(req, res) {
   const chapter   = req.body;
 
   Course.findByIdAndUpdate(courseId,
-    {$push: {chapters: {title: chapter.title}}},
+    {
+      $push: {
+        chapters: {title: chapter.title}
+      }
+    },
     (err, course) => {
       if (err) return sendJSONresponse(res, 200, err);
+      updateChaptersOrders(courseId, course);
       sendJSONresponse(res, 200, course);
+
     }
   );
 }

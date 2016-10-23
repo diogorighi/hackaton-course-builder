@@ -1,6 +1,23 @@
 {% extends 'layout/layout.nunjucks' %}
 
 {% block content %}
+
+{% if err %}
+<div class="row">
+  <div class="col-lg-8 col-md-8 col-sm-12">
+    <div class="alert alert-danger">
+      {{err}}
+
+        {% for err in err.error %}
+          - {{err}}<br>
+        {% endfor %}
+    </div>
+  </div>
+</div>
+
+{% endif %}
+
+
 <div class="row m-b-15">
 	<div class="col-md-12">
 		<a class="btn btn-lg btn-primary pull-right" href="/courses/new">

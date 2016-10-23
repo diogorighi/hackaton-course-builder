@@ -49,3 +49,5 @@ process.on('SIGTERM', () => {
 
 // SCHEMAS & MODELS
 require('./courses');
+require('./contents');
+require('./chaptersContents');

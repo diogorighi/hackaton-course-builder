@@ -1,7 +1,10 @@
-const express   = require('express');
-const mongoose  = require('mongoose');
-const router    = express.Router();
-const Course    = mongoose.model('Course');
+const express             = require('express');
+const mongoose            = require('mongoose');
+const router              = express.Router();
+const Course              = mongoose.model('Course');
+const Content             = mongoose.model('Content');
+const ChaptersContents    = mongoose.model('ChaptersContents');
+
 const helpFuncs = require('../funcs.js');
 
 const sendJSONresponse = helpFuncs.sendJSONresponse;
@@ -28,15 +31,26 @@ function getAllCourses(req, res) {
  */
 
 function getCourse(req, res) {
-  const courseId = req.params.id;
+  const courseId  = req.params.id;
+
+
   Course.findById(courseId, (err, course) => {
     if (err) return sendJSONresponse(res, 200, err);
 
-    sendJSONresponse(res, 200, course);
+    // // Get all chapters ids
+    // let allChapters = course.chapters.map((chapter) => {
+    //   return mongoose.Types.ObjectId(chapter._id);
+    // });
+
+    ChaptersContents.find({courseId}, function (err, data) {
+      if (err) return err;
+      // All contents saved to a course given by CourseId
+      //
+
+      sendJSONresponse(res, 200, course);
+    });
   });
 }
-
-
 
 /**
  * Create course
@@ -44,14 +58,14 @@ function getCourse(req, res) {
  * @param {res} response
  */
 
-
 function createCourse(req, res) {
-  const course = req.body;
-  const cv = courseValidation(course);
+  const course  = req.body;
+  const cv      = courseValidation(course);
 
   if (cv.isValid) {
     course.price = course.price.replace('$', '').replace(',', '');
     course.duration = course.duration.replace(',', '');
+
     Course.create(course, function(err, course) {
       if (err) return sendJSONresponse(res, 404, err);
       sendJSONresponse(res, 200, course);
@@ -68,13 +82,23 @@ function createCourse(req, res) {
  */
 
 function updateCourse(req, res) {
-  const course = req.body;
+  const course  = req.body;
+  const cv      = courseValidation(course);
 
-  Course.findByIdAndUpdate(course.id, course, function(err, course) {
+  if (cv.isValid) {
+    course.price = course.price.replace('$', '').replace(',', '');
+    course.duration = course.duration.replace(',', '');
 
-    if (err) return sendJSONresponse(res, 404, err);
-    sendJSONresponse(res, 200, course);
-  });
+    Course.findByIdAndUpdate(course.id, course, function(err, course) {
+      if (err) return sendJSONresponse(res, 404, err);
+      sendJSONresponse(res, 200, course);
+    });
+  } else {
+    sendJSONresponse(res, 404, cv.messages);
+  }
+
+
+
 }
 
 // ============================================================================
