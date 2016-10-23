@@ -4,3 +4,4 @@ public/components
 .vscode
 .DS_Store
 nbproject
+app/uploads

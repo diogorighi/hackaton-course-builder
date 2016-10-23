@@ -10,4 +10,8 @@ $(function(){
         }
     });
   }
+
+  if($('.nestable-list')) {
+    $('.nestable-list').nestable();
+  }
 });

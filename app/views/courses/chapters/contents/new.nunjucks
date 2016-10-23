@@ -18,39 +18,40 @@
             <div class="col-sm-12 col-md-12">
               <div class="form-group">
                 <label>Media Type</label>
-                <select class="form-group">
+                <select class="full-width" data-init-plugin="select2">
                   <option value="audio">Audio</option>
                   <option value="video">video</option>
                   <option value="pdf">pdf</option>
                   <option value="download">download</option>
                 </select>
-                <input type="file" class="form-control" name="content[file]" />
               </div>
             </div>
 
-          <div class="row">
-            <div class="col-sm-12 col-md-12">
-              <div class="form-group">
-                <label>Content</label>
-                <div class="summernote-wrapper">
-                  <textarea id="summernote" name="content[content]"></textarea>
+            
+
+            <div class="row">
+              <div class="col-sm-12 col-md-12">
+                <div class="form-group">
+                  <label>Content</label>
+                  <div class="summernote-wrapper">
+                    <textarea id="summernote" name="content[content]"></textarea>
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
-          <div class="clearfix"></div>
-          <div class="pull-right">
-            <a href="/courses" class="btn btn-lg btn-danger">
-              Cancel
-            </a>
-            <button class="btn btn-lg btn-primary" type="submit">
-              <i class="fa fa-save"></i>
-              Save
-            </button>
-          </div>
-        </form>
+            <div class="clearfix"></div>
+            <div class="pull-right">
+              <a href="/courses" class="btn btn-lg btn-danger">
+                Cancel
+              </a>
+              <button class="btn btn-lg btn-primary" type="submit">
+                <i class="fa fa-save"></i>
+                Save
+              </button>
+            </div>
+          </form>
+        </div>
       </div>
     </div>
   </div>
-</div>
-{% endblock %}
+  {% endblock %}

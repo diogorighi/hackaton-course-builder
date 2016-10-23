@@ -29,23 +29,35 @@
         <p>
           Create your chapters and organize your content!
         </p>
-        <div class="dd clearfix" id="basic_example">
+        <div class="dd clearfix nestable-list">
           <ol class="dd-list">
             {% for chapter in course.chapters %}
-            <li class="dd-item" data-id="1">
+            <li class="dd-item">
               <div class="dd-handle">
                 {{chapter.title}}
                 <div class="pull-right">
-
-                  <a href="/courses/{{course._id}}/chapters/{{chapter._id}}/contents/new" class="btn btn-primary btn-xs btn-nestable">
+                  <a href="/courses/{{course._id}}/chapters/{{chapter._id}}/contents/new" class="btn btn-success btn-xs btn-nestable dd-nodrag">
                     <i class="fa fa-book"></i>
                   </a>
-
-                  <a href="/courses/{{course._id}}/chapters/{{chapter._id}}/edit" class="btn btn-primary btn-xs btn-nestable">
+                  <a href="/courses/{{course._id}}/chapters/{{chapter._id}}/edit" class="btn btn-primary btn-xs btn-nestable dd-nodrag">
                     <i class="fa fa-pencil"></i>
                   </a>
                 </div>
-              </div>
+              </div><!-- dd-handle -->
+              <ol class="dd-list">
+                {% for content in chapter.contents %}
+                <li class="dd-item">
+                  <div class="dd-handle">
+                    {{content.title}}
+                    <div class="pull-right">
+                      <a class="btn btn-primary btn-xs btn-nestable dd-nodrag" download="{{content.content}}" href="/uploads/{{content.content}}">
+                        <i class="fs-12 pg-download"></i>
+                      </a>
+                    </div>
+                  </div>
+                </li>
+                {% endfor %}
+              </ol>
             </li>
             {% endfor %}
           </ol>
@@ -54,9 +66,6 @@
         <div class="m-t-15 pull-right">
           <a class="btn btn-primary" href="/courses/{{course._id}}/chapters/new">
       			New chapter
-      		</a>
-          <a class="btn btn-primary" href="/chapters/{{course._id}}/new">
-      			New content
       		</a>
         </div>
       </div><!-- /panel-body -->

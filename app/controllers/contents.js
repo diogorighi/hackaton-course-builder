@@ -24,7 +24,7 @@ function createContent(req, res) {
   const chapterId = req.params.chapterId;
   const content   = {
     title: req.body.content.title,
-    content: req.file.path,
+    content: req.file.filename,
     media_type: req.file.mimetype
   };
 
