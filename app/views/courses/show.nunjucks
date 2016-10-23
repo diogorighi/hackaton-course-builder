@@ -36,6 +36,11 @@
               <div class="dd-handle">
                 {{chapter.title}}
                 <div class="pull-right">
+
+                  <a href="/courses/{{course._id}}/chapters/{{chapter._id}}/contents/new" class="btn btn-primary btn-xs btn-nestable">
+                    <i class="fa fa-book"></i>
+                  </a>
+
                   <a href="/courses/{{course._id}}/chapters/{{chapter._id}}/edit" class="btn btn-primary btn-xs btn-nestable">
                     <i class="fa fa-pencil"></i>
                   </a>

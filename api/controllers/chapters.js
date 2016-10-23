@@ -6,6 +6,12 @@ const helpFuncs = require('../funcs.js');
 
 const sendJSONresponse = helpFuncs.sendJSONresponse;
 
+/**
+ * Create chapter
+ * @param {req} requisition
+ * @param {res} response
+ */
+
 function createChapter(req, res) {
   const courseId  = req.params.id;
   const chapter   = req.body;
@@ -18,6 +24,13 @@ function createChapter(req, res) {
     }
   );
 }
+
+/**
+ * Get Chapter
+ * @param {req} requisition
+ * @param {res} response
+ */
+
 
 function getChapter(req, res) {
   const courseId = req.params.id;
@@ -34,6 +47,12 @@ function getChapter(req, res) {
   });
 }
 
+/**
+ * Update Chapter
+ * @param {req} requisition
+ * @param {res} response
+ */
+
 function updateChapter(req, res) {
   const courseId = req.params.id;
   const chapterId = req.params.chapterId;
@@ -48,9 +67,10 @@ function updateChapter(req, res) {
   (err, course) => {
     if (err) return sendJSONresponse(res, 200, err);
     sendJSONresponse(res, 200, course);
-  }
-);
+  });
 }
+
+// ============================================================================
 
 module.exports = {
   createChapter,

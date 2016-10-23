@@ -69,6 +69,8 @@ function updateCourse(req, res) {
   });
 }
 
+// ============================================================================
+
 module.exports = {
   getAllCourses,
   getCourse,
@@ -76,4 +78,3 @@ module.exports = {
   updateCourse,
   sendJSONresponse
 };
-

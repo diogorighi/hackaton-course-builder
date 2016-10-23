@@ -1,6 +1,5 @@
-const rp = require('request-promise');
-
-const apiUrl = 'http://localhost:3000/api/v1';
+const rp      = require('request-promise');
+const apiUrl  = 'http://localhost:3000/api/v1';
 
 /**
  * Request the form to add a new chapter
