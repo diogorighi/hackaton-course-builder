@@ -20,24 +20,29 @@ function newContent(req, res) {
  */
 
 function createContent(req, res) {
-  const courseId  = req.params.id;
-  const chapterId = req.params.chapterId;
-  const content   = {
-    title: req.body.content.title,
-    content: req.file.filename,
-    media_type: req.file.mimetype
-  };
 
-  const options = {
-    method: 'POST',
-    body: content,
-    uri: `${apiUrl}/courses/${courseId}/chapters/${chapterId}/contents`,
-    json: true
-  };
+  if (req.file) {
+    const courseId = req.params.id;
+    const chapterId = req.params.chapterId;
+    const content = {
+      title: req.body.content.title,
+      content: req.file.filename,
+      media_type: req.file.mimetype
+    };
 
-  rp(options)
-  .then(() => res.redirect(`/courses/${courseId}`))
-  .catch(err => res.render('/', {err, chapter}));
+    const options = {
+      method: 'POST',
+      body: content,
+      uri: `${apiUrl}/courses/${courseId}/chapters/${chapterId}/contents`,
+      json: true
+    };
+
+    rp(options)
+    .then(() => res.redirect(`/courses/${courseId}`))
+    .catch(err => res.render('/', {err}));
+  } else {
+    res.send('Tipo de arquivo não suportado.');
+  }
 }
 
 // ============================================================================

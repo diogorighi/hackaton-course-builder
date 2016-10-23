@@ -18,40 +18,54 @@
             <div class="col-sm-12 col-md-12">
               <div class="form-group">
                 <label>Media Type</label>
-                <select class="full-width" data-init-plugin="select2">
+                <select class="full-width js-select-media-type" data-init-plugin="select2">
+                  <option value="">Select a media type</option>
+                  <option value="image">Image</option>
                   <option value="audio">Audio</option>
-                  <option value="video">video</option>
-                  <option value="pdf">pdf</option>
-                  <option value="download">download</option>
+                  <option value="video">Video</option>
+                  <option value="pdf">PDF</option>
+                  <option value="html">HTML</option>
                 </select>
               </div>
             </div>
+          </div>
 
-            
+          <div class="row js-upload" style="display: none;">
+            <div class="col-sm-12 col-md-12">
+              <div class="form-group">
+                <label>Upload a file:</label>
+                <span class="help js-help js-help--image" style="display: none;">Supported extensions: .jpg, .jpeg, .png, .gif</span>
+                <span class="help js-help js-help--audio" style="display: none;">Supported extensions: .wma, wav</span>
+                <span class="help js-help js-help--video" style="display: none;">Supported types: .mp4</span>
+                <span class="help js-help js-help--pdf" style="display: none;">Supported types: .pdf</span>
+                <input class="form-control" type="file" name="content[file]">
+              </div>
+            </div>
+          </div>
 
-            <div class="row">
-              <div class="col-sm-12 col-md-12">
-                <div class="form-group">
-                  <label>Content</label>
-                  <div class="summernote-wrapper">
-                    <textarea id="summernote" name="content[content]"></textarea>
-                  </div>
+          <div class="row js-html-content" style="display: none;">
+            <div class="col-sm-12 col-md-12">
+              <div class="form-group">
+                <label>HTML Content</label>
+                <div class="summernote-wrapper">
+                  <textarea id="summernote" name="content[content]"></textarea>
                 </div>
               </div>
             </div>
-            <div class="clearfix"></div>
-            <div class="pull-right">
-              <a href="/courses" class="btn btn-lg btn-danger">
-                Cancel
-              </a>
-              <button class="btn btn-lg btn-primary" type="submit">
-                <i class="fa fa-save"></i>
-                Save
-              </button>
-            </div>
-          </form>
-        </div>
+          </div>
+          <div class="clearfix"></div>
+          <div class="pull-right">
+            <a href="/courses" class="btn btn-danger">
+              Cancel
+            </a>
+            <button class="btn btn-primary" type="submit">
+              <i class="fa fa-save"></i>
+              Save
+            </button>
+          </div>
+        </form>
       </div>
     </div>
   </div>
-  {% endblock %}
+</div>
+{% endblock %}

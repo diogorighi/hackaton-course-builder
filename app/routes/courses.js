@@ -7,24 +7,42 @@ const multer        = require('multer');
 const router        = express.Router();
 const apiUrl        = 'http://localhost:3000/api/v1';
 
-
 const mimeTypes = {
   'image/png': '.png',
-  'image/jpg': '.jpg',
-  'image/gif': '.gif'
+  'image/jpeg': '.jpg',
+  'image/gif': '.gif',
+  'video/mp4': '.mp4',
+  'audio/x-ms-wma': '.wma',
+  'audio/x-wav': '.wav',
+  'application/pdf': '.pdf'
 };
 
-
 const storage = multer.diskStorage({
-  destination: function (req, file, cb) {
-    cb(null, './app/uploads/')
+  destination: function(req, file, cb) {
+    cb(null, './app/uploads/');
   },
-  filename: function (req, file, cb) {
-    cb(null, Date.now().toString() + mimeTypes[file.mimetype])
+  filename: function(req, file, cb) {
+    cb(null, Date.now().toString() + mimeTypes[file.mimetype]);
   }
 });
 
-const upload        = multer({storage});
+const fileFilter = function(req, file, cb) {
+  const fileMimeType = file.mimetype;
+  const acceptableMimeTypes = Object.keys(mimeTypes);
+  const check = acceptableMimeTypes.filter(function(item) {
+    return item === fileMimeType;
+  });
+
+  if (check.length) {
+    console.log('File is OK!');
+    cb(null, true);
+  } else {
+    console.log('File is NOT OK!');
+    cb(null, false);
+  }
+};
+
+const upload = multer({storage, fileFilter});
 
 // ============================================================================
 // Courses
@@ -52,9 +70,5 @@ router.post('/:id/chapters', chapterCtrl.createChapter);
 router.get('/:id/chapters/:chapterId/contents/new', contentCtrl.newContent);
 
 router.post('/:id/chapters/:chapterId/contents', upload.single('content[file]'), contentCtrl.createContent);
-
-//router.post('/:courseId/chapters/:chapterId/contents', contetrCtrl.createContent);
-
-
 
 module.exports = router;
