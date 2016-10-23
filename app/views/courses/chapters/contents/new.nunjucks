@@ -4,11 +4,11 @@
   <div class="col-lg-8 col-md-8 col-sm-8">
     <div class="panel panel-default">
       <div class="panel-body">
-        <form id="form-personal" class="js-form-course" action="/courses" method="POST" role="form" autocomplete="off" enctype="multipart/form-data">
+        <form id="form-personal" class="js-form-course" action="/courses/{{courseId}}/chapters/{{chapterId}}/contents" method="POST" role="form" autocomplete="off" enctype="multipart/form-data">
           <div class="row">
             <div class="col-sm-12 col-md-12">
               <div class="form-group">
-                <label>Name</label>
+                <label>Content Title</label>
                 <input type="text" class="form-control" name="content[title]" />
               </div>
             </div>
@@ -24,7 +24,7 @@
                   <option value="pdf">pdf</option>
                   <option value="download">download</option>
                 </select>
-                <input type="file" class="form-control" name="content[title]" />
+                <input type="file" class="form-control" name="content[file]" />
               </div>
             </div>
 

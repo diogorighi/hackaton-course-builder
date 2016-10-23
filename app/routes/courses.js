@@ -2,10 +2,29 @@ const express       = require('express');
 const rp            = require('request-promise');
 const courseCtrl    = require('../controllers/courses');
 const chapterCtrl   = require('../controllers/chapters');
-const contetrCtrl   = require('../controllers/contents');
-
+const contentCtrl   = require('../controllers/contents');
+const multer        = require('multer');
 const router        = express.Router();
 const apiUrl        = 'http://localhost:3000/api/v1';
+
+
+const mimeTypes = {
+  'image/png': '.png',
+  'image/jpg': '.jpg',
+  'image/gif': '.gif'
+};
+
+
+const storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, './app/uploads/')
+  },
+  filename: function (req, file, cb) {
+    cb(null, Date.now().toString() + mimeTypes[file.mimetype])
+  }
+});
+
+const upload        = multer({storage});
 
 // ============================================================================
 // Courses
@@ -30,8 +49,11 @@ router.post('/:id/chapters', chapterCtrl.createChapter);
 
 // ============================================================================
 // Content
+router.get('/:id/chapters/:chapterId/contents/new', contentCtrl.newContent);
 
-router.get('/:id_course/chapters/:id_chapter/contents/new', contetrCtrl.newContent);
+router.post('/:id/chapters/:chapterId/contents', upload.single('content[file]'), contentCtrl.createContent);
+
+//router.post('/:courseId/chapters/:chapterId/contents', contetrCtrl.createContent);
 
 
 
