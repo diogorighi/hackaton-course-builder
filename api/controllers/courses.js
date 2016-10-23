@@ -33,7 +33,17 @@ function getAllCourses(req, res) {
 function getCourse(req, res) {
   const courseId  = req.params.id;
 
+  Content
+  .find({"_courseId": mongoose.Types.ObjectId(courseId)})
+  .populate('_courseId')
+  .exec(function (err, course) {
+    if (err) return err;
 
+    sendJSONresponse(res, 200, course);
+  });
+
+
+  /*
   Course.findById(courseId, (err, course) => {
     if (err) return sendJSONresponse(res, 200, err);
 
@@ -42,14 +52,9 @@ function getCourse(req, res) {
     //   return mongoose.Types.ObjectId(chapter._id);
     // });
 
-    ChaptersContents.find({courseId}, function (err, data) {
-      if (err) return err;
-      // All contents saved to a course given by CourseId
-      //
-
-      sendJSONresponse(res, 200, course);
-    });
+    sendJSONresponse(res, 200, course);
   });
+  */
 }
 
 /**
@@ -61,6 +66,7 @@ function getCourse(req, res) {
 function createCourse(req, res) {
   const course  = req.body;
   const cv      = courseValidation(course);
+  course._id    = mongoose.Types.ObjectId();
 
   if (cv.isValid) {
     course.price = course.price.replace('$', '').replace(',', '');

@@ -18,27 +18,17 @@ function createContent(req, res) {
   const chapterId = req.params.chapterId;
   const content   = req.body;
 
-
   // Creating a new content and saving reference
-  const newContent  = new Content({title: content.title, content: content.content, media_type: content.media_type});
+  const newContent  = new Content({
+    '_courseId': mongoose.Types.ObjectId(courseId),
+    title: content.title,
+    content: content.content,
+    media_type: content.media_type
+  });
 
   newContent.save(function (err) {
-    if (err) return err;
-
-    const chapter_contents = new ChaptersContents(
-      {
-        courseId: courseId,
-        chapterId: chapterId,
-        contentId: newContent._id
-      }
-    );
-
-    chapter_contents.save(function (err) {
-      if (err) {
-        return sendJSONresponse(res, 200, err);
-      }
-      sendJSONresponse(res, 200, courseId);
-    });
+    if (err) return sendJSONresponse(res, 200, err);
+    sendJSONresponse(res, 200, courseId);
   });
 }
 

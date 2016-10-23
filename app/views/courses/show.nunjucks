@@ -1,5 +1,8 @@
 {% extends 'layout/layout.nunjucks' %} {% block content %}
 
+{% set allContents  = course %}
+{% set course       = allContents[0]._courseId %}
+
 <div class="row">
   <div class="col-sm-12">
     <div class="panel">
@@ -27,12 +30,25 @@
       </div>
       <div class="panel-body">
         <p>
-          Create your chapters and organize your content!
+          <p> Ordered List </p>
         </p>
-        <div class="dd clearfix nestable-list">
+
+        <div class="row">
+          <div class="dd" id="nestable3" data-json="{{course.chapters_order}}">
+            <ol class='dd-list dd3-list'>
+              <div id="dd-empty-placeholder"></div>
+            </ol>
+          </div>
+        </div>
+
+        <hr />
+
+        <p> All chapters and contents </p>
+
+        <div id="nestable-unordered" class="dd clearfix nestable-list">
           <ol class="dd-list">
             {% for chapter in course.chapters %}
-            <li class="dd-item" data-id="{{chapter._id}}">
+            <li class="dd-item" data-id="{{chapter._id}}" data-title="{{chapter.title}}" data-type="chapter" data-course={{course._id}}>
               <div class="dd-handle">
                 {{chapter.title}}
                 <div class="pull-right">
@@ -44,43 +60,42 @@
                   </a>
                 </div>
               </div><!-- dd-handle -->
-              <ol class="dd-list">
-                {% for content in course.contents %}
-                <li class="dd-item" data-id="{{content._id}}">
-                  <div class="dd-handle">
-                    {{content.title}}
-                    <div class="pull-right">
-                      {% if content.media_type == 'html' %}
-                      <a class="btn btn-primary btn-xs btn-nestable dd-nodrag js-modal" data-id="{{content._id}}">
-                        <i class="fs-12 pg-search"></i>
-                      </a>
-                      {% else %}
-                      <a class="btn btn-primary btn-xs btn-nestable dd-nodrag" download="{{content.content}}" href="/uploads/{{content.content}}">
-                        <i class="fs-12 pg-download"></i>
-                      </a>
-                      {% endif %}
-                    </div>
-                  </div>
-                  <!-- Modal -->
-                  <div class="modal fade slide-up disable-scroll" id="{{content._id}}" tabindex="-1" role="dialog" aria-hidden="false">
-                    <div class="modal-dialog ">
-                      <div class="modal-content-wrapper">
-                        <div class="modal-content">
-                          <div class="modal-header clearfix text-left">
-                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><i class="pg-close fs-14"></i>
-                            </button>
-                            <h5>{{content.title}}</h5>
-                          </div>
-                          <div class="modal-body">
-                            {{content.content | safe}}
-                          </div>
-                        </div>
+            </li>
+            {% endfor %}
+
+            {% for content in allContents %}
+            <li class="dd-item" data-id="{{content._id}}" data-title="{{content.title}}" data-type="content" data-media="{{content.media_type}}" data-content="{{content.content}}">
+              <div class="dd-handle">
+                {{content.title}}
+                <div class="pull-right">
+                  {% if content.media_type == 'html' %}
+                  <a class="btn btn-primary btn-xs btn-nestable dd-nodrag js-modal" data-id="{{content._id}}">
+                    <i class="fs-12 pg-search"></i>
+                  </a>
+                  {% else %}
+                  <a class="btn btn-primary btn-xs btn-nestable dd-nodrag" download="{{content.content}}" href="/uploads/{{content.content}}">
+                    <i class="fs-12 pg-download"></i>
+                  </a>
+                  {% endif %}
+                </div>
+              </div>
+              <!-- Modal -->
+              <div class="modal fade slide-up disable-scroll" id="{{content._id}}" tabindex="-1" role="dialog" aria-hidden="false">
+                <div class="modal-dialog ">
+                  <div class="modal-content-wrapper">
+                    <div class="modal-content">
+                      <div class="modal-header clearfix text-left">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><i class="pg-close fs-14"></i>
+                        </button>
+                        <h5>{{content.title}}</h5>
+                      </div>
+                      <div class="modal-body">
+                        {{content.content | safe}}
                       </div>
                     </div>
-                  </div><!-- /.modal-content -->
-                </li>
-                {% endfor %}
-              </ol>
+                  </div>
+                </div>
+              </div><!-- /.modal-content -->
             </li>
             {% endfor %}
           </ol>
