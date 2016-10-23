@@ -44,16 +44,16 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/uploads', express.static(path.join(__dirname, 'app', 'uploads')));
 
 // ============================================================================
-// App Routers
-
-app.use('/', routes);
-app.use('/courses', courses);
-
-// ============================================================================
 // API Routers
 
 app.use('/api/v1', api);
 app.use('/api/v1/courses', apiCourses);
+
+// ============================================================================
+// App Routers
+
+app.use('/courses', courses);
+app.use('/', routes);
 
 // ============================================================================
 // Error handlers

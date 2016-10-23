@@ -9,8 +9,8 @@
           {{course.description | safe}}
         </p>
         <p>
-          Price: {{course.price}} /
-          Duration: {{course.duration}}
+          Price: $ {{course.price | float}} /
+          Duration: {{course.duration}} hours
         </p>
       </div>
     </div>

@@ -68,7 +68,7 @@ function createCourse(req, res) {
   };
 
   rp(options)
-  .then(() => res.redirect('/'))
+  .then(() => res.redirect('/courses'))
   .catch(err => res.render('courses/new', {err}));
 }
 
@@ -90,7 +90,7 @@ function updateCourse(req, res) {
   };
 
   rp(options)
-  .then(() => res.redirect('/'))
+  .then(() => res.redirect('/courses'))
   .catch(err => res.render('courses/new', {err, course}));
 }
 
