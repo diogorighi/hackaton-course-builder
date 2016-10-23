@@ -34,10 +34,10 @@ const fileFilter = function(req, file, cb) {
   });
 
   if (check.length) {
-    console.log('File is OK!');
+    // Return true if file is acceptable
     cb(null, true);
   } else {
-    console.log('File is NOT OK!');
+    // Return false if file is acceptable
     cb(null, false);
   }
 };
@@ -75,7 +75,6 @@ router.post('/:id/chapters', chapterCtrl.createChapter);
 // ============================================================================
 // Content
 router.get('/:id/chapters/:chapterId/contents/new', contentCtrl.newContent);
-
 router.post('/:id/chapters/:chapterId/contents', upload.single('content[file]'), contentCtrl.createContent);
 
 

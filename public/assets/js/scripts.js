@@ -51,4 +51,9 @@ $(function(){
       $('.js-help--' + mediaType).fadeIn(300);
     })
   }
+
+  $('.js-modal').on('click', function() {
+    var target = $(this).data('id');
+    $('#' + target).modal('show');
+  });
 });
