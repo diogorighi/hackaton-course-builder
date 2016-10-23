@@ -6,7 +6,7 @@
       <div class="panel-body">
         <h2>{{course.name}} - {{course.subtitle}}</h2>
         <p>
-          {{course.description}}
+          {{course.description | safe}}
         </p>
         <p>
           Price: {{course.price}} /
@@ -72,7 +72,7 @@
                             <h5>{{content.title}}</h5>
                           </div>
                           <div class="modal-body">
-                            {{content.content}}
+                            {{content.content | safe}}
                           </div>
                         </div>
                       </div>
