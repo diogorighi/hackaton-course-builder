@@ -17,8 +17,9 @@ $(function(){
     // Update via Ajax Chapter order
     $('.dd').on('change', function() {
       var chapterOrder = $('.dd').nestable('serialize');
+      var courseId = $(location).attr('href').split('/').pop();
       $.ajax({
-        url: '/api/v1/courses/setChapterOrder/580c27915756cd277593addf',
+        url: '/api/v1/courses/setChapterOrder/' + courseId,
         method: "POST",
         data: JSON.stringify(chapterOrder),
         contentType: 'application/json',
@@ -27,7 +28,6 @@ $(function(){
       })
     });
   }
-
 
   if($('.js-select-media-type')) {
     $('.js-select-media-type').on('change', function() {

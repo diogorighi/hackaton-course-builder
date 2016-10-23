@@ -39,17 +39,12 @@ function getCourse(req, res) {
 
     const chapters_order  = JSON.parse(course.chapters_order);
     const chapters        = course.chapters;
-    course.ordered  = [];
 
-    console.log("========================================");
-
-    chapters_order.forEach(function(item) {
-      let a = chapters.find( function(element) {
-        return element._id === item.id
-      });
-      course.ordered.push(a);
-    });
-    console.log(course.ordered);
+    // Sort chapters by chapters_order
+    course.chapters_ordered = chapters_order.map( item =>
+      chapters.find( element =>
+        element._id === item.id)
+    );
 
     res.render(`courses/show`, {course})
   })

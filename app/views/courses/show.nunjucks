@@ -31,7 +31,7 @@
         </p>
         <div class="dd clearfix nestable-list">
           <ol class="dd-list">
-            {% for chapter in course.ordered %}
+            {% for chapter in course.chapters_ordered %}
             <li class="dd-item" data-id="{{chapter._id}}">
               <div class="dd-handle">
                 {{chapter.title}}
